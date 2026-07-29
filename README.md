@@ -8,12 +8,12 @@ topographic map.
 ## Requirements
 
 - Python 3.11+
-- ~200 MB free disk
+- ~150 MB free disk
 
 ## Run it
 
 ```bash
-tar xzf lftp-command-pi-20260728.tar.gz
+tar xzf lftp-command-pi-20260729.tar.gz
 cd lftp-command-pi/backend
 
 python3 -m venv .venv
@@ -44,12 +44,36 @@ close it out.
 bearing, cumulative climb/descent, and an elevation profile — all sampled offline from DEM
 data. **⌖ From person** anchors the route to a teammate's live position instead of a map click.
 
-**Pin rail** (left edge of map) — Drop OBJ / ENEMY / IED / CASEVAC / LZ and more. Objectives
+**Pin rail** (left edge of map) — Drop OBJ / ENEMY / IED / CASEVAC / LZ / DZ and more. Objectives
 auto-number OBJ 1, 2, 3… and never recycle a designator. Click one to mark it COMPLETE and it
 announces on the net.
 
-**Also worth a click:** `MGRS grid`, `Range rings`, `Center on me`, and the
-`DAY / NGT / NVG / GRN` display modes top-right.
+**↔ A/B link** (bottom bar) — Pick any two contacts and ask the question that matters
+on a radio net: *can these two actually talk?* It samples the terrain between them, builds
+the ray between both antennas, corrects for earth curvature, and checks the 60% Fresnel
+criterion at 915 MHz. You get **CLEAR / MARGINAL / BLOCKED** — and when it's blocked, where
+the obstruction is, how far above the line it sits, and how high a relay would have to be to
+fix it. Try **SLAYER ↔ WARLORD** (Pikes Peak to the Air Force Academy): blocked by 166 m of
+front range, needing a 189 m relay — which is above the legal drone ceiling, so that link
+can't be fixed from the air.
+
+**The drone** — A quadcopter (SCYTHE) orbits the team. Click it: altitude MSL *and* above
+ground (subtracted from the offline DEM — the aircraft has no barometer), battery, endurance,
+and the countdown on its **time-boxed relay window**. That window is the point: a drone at
+120 m has roughly 344× the direction-finding footprint of a ground node, so the relay is
+armed for a bounded period and then shuts itself off. Watch it go quiet when the timer
+expires — the silence is the feature. `◈ Relay LOS` draws its coverage as two rings: solid
+for the range you can plan on, dashed for the optimistic horizon.
+
+**⊞ Addons → Drone Request** — Ask for airborne relay between two elements. It works out the
+altitude the link needs before you ask, and tells you when a drone physically can't solve
+your problem.
+
+**Selected-contact box** (bottom-right of the map) — bearing, range, back-bearing, grid and
+elevation delta for whatever you've clicked. Stays put no matter how far you zoom in.
+
+**Also worth a click:** `MGRS grid`, `Range rings`, `Center on me`, `⋯ Trails` (movement
+history), and the `DAY / NGT / NVG / GRN` display modes top-right.
 
 ## Notes
 
